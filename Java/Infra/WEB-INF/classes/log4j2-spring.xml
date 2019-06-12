@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+            	<pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+        </Console>
+        
+        <RollingFile name="TraceRolling"
+            fileName="./logs/apipayment/trace.log"
+            filePattern="./logs/apipayment/bkpTrace/$${date:yyyy-MM}/trace-%d{-dd-MMMM-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy
+                    size="10 MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+        
+        <RollingFile name="InfoRolling"
+            fileName="./logs/apipayment/info.log"
+            filePattern="./logs/apipayment/bkpInfo/$${date:yyyy-MM}/info-%d{-dd-MMMM-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy
+                    size="10 MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+        
+        <RollingFile name="WarnRolling"
+            fileName="./logs/apipayment/warn.log"
+            filePattern="./logs/apipayment/bkpWarn/$${date:yyyy-MM}warn-%d{-dd-MMMM-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy
+                    size="10 MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+        
+    </Appenders>
+ 
+    <Loggers>
+        <Root level="trace">
+            <AppenderRef ref="Console" level="info" />
+            <AppenderRef ref="TraceRolling" />
+            <AppenderRef ref="InfoRolling" level="info" />
+            <AppenderRef ref="WarnRolling" level="warn"/>
+        </Root>
+    </Loggers>
+ 
+</Configuration>
